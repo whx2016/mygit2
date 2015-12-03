@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<listener>
+		<listener-class>demo.SessionListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>demo.RequestListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>demo.RequestAttributeListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>demo.ContextListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>helloFilter</filter-name>
+		<filter-class>demo.HelloFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>helloFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>responseFilter</filter-name>
+		<filter-class>demo.ResponseFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>responseFilter</filter-name>
+		<url-pattern>/hello</url-pattern>
+	</filter-mapping>
+	<!-- <servlet>
+		<servlet-name>helloServlet</servlet-name>
+		<servlet-class>demo.HelloServlet</servlet-class>
+		<load-on-startup>-1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>helloServlet</servlet-name>
+		<url-pattern>/hello</url-pattern>
+	</servlet-mapping> -->
+	
+	<!-- 通过getServletContext().getInitParameter("XX")读取 -->
+	<!-- <servlet> 
+		<servlet-name>invoker</servlet-name> 
+			<servlet-class> 
+				org.apache.catalina.servlets.InvokerServlet 
+			</servlet-class> 
+		<init-param>
+			<param-name>debug</param-name> 
+			<param-value>0</param-value> 
+		</init-param>
+		<load-on-startup>2</load-on-startup> 
+	</servlet>
+	<servlet-mapping> 
+		<servlet-name>invoker</servlet-name> 
+		<url-pattern>/</url-pattern>
+	</servlet-mapping> -->
+	
+	<context-param>
+	   <param-name>driver</param-name>
+	   <param-value>org.postgresql.Driver</param-value>
+	</context-param>
+	
+	<context-param>
+	   <param-name>url</param-name>
+	   <param-value>jdbc:postgresql://zlddb.tq.cn:5432/zldetc</param-value>
+	</context-param>
+	
+	<context-param>
+	   <param-name>username</param-name>
+	   <param-value>tracqdev</param-value>
+	</context-param>
+	
+	<context-param>
+	   <param-name>password</param-name>
+	   <param-value>tracq123</param-value>
+	</context-param>
+	<!-- log4j参数设置,如果log4j.properties在src目录下就不需要了,log4j会自动的去扫描找到该文件,如果不在src目录下就得配置了，比如在WEB-INF/log4j.properties下 -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>WEB-INF/classes/log4j.properties</param-value>
+	</context-param>
+	<!-- 会话超时配置（单位为分钟）  -->   
+   <session-config>    
+      <session-timeout>1</session-timeout>    
+   </session-config>
+  <display-name></display-name>
+</web-app>
